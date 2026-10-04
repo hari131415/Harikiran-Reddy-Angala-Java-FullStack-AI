@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Harikiran Reddy Angala — Senior Java Full Stack Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-2:#f7f7f5;
+    --surface:#ffffff;
+    --surface-2:#f3f4f1;
+    --text:#111417;
+    --muted:#5c6570;
+    --line:#e6e8e3;
+    --accent:#c2410c;
+    --accent-2:#0f766e;
+    --accent-bg:#fff1e6;
+    --chip:#f1f3ef;
+    --nav-bg:rgba(255,255,255,0.92);
+    --shadow:0 12px 32px rgba(0,0,0,0.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0a0e13;
+      --bg-2:#0d1219;
+      --surface:#11161f;
+      --surface-2:#151c28;
+      --text:#eef2f7;
+      --muted:#9aa8b8;
+      --line:#1e293b;
+      --accent:#fb923c;
+      --accent-2:#2dd4bf;
+      --accent-bg:#1f1a14;
+      --chip:#1a2436;
+      --nav-bg:rgba(10,14,19,0.92);
+      --shadow:0 16px 40px rgba(0,0,0,0.35);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  /* Nav */
+  .nav{position:sticky;top:0;z-index:40;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:-0.02em}
+  .brand-mark{width:36px;height:36px;border-radius:9px;background:var(--text);color:var(--bg);display:grid;place-items:center;font-family:Sora,sans-serif;font-size:13px;font-weight:800}
+  .brand small{display:block;font-weight:500;color:var(--muted);font-size:12px;letter-spacing:0;line-height:1.1}
+  .links{display:flex;gap:6px;align-items:center}
+  .links a{padding:8px 12px;border-radius:999px;font-size:14px;font-weight:500;color:var(--muted)}
+  .links a:hover,.links a.active{color:var(--text);background:var(--chip)}
+  .links a.cta{background:var(--text);color:var(--bg)}
+  .links a.cta:hover{background:var(--accent);color:white}
+  .menu-btn{display:none;border:1px solid var(--line);background:var(--surface);width:42px;height:42px;border-radius:10px;align-items:center;justify-content:center;cursor:pointer}
+  /* Hero */
+  .hero{padding:76px 0 56px;border-bottom:1px solid var(--line);background:
+    radial-gradient(600px 280px at 15% -5%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%),
+    linear-gradient(to bottom, var(--bg-2), var(--bg))}
+  .availability{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid var(--line);background:var(--surface);border-radius:999px;font-size:13px;font-weight:600}
+  .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,0.16)}
+  .hero h1{font-family:Sora,Inter,sans-serif;font-size:clamp(40px,6vw,68px);line-height:0.98;letter-spacing:-0.04em;margin:22px 0 10px;font-weight:800;max-width:12ch}
+  .hero h1 span{color:var(--accent)}
+  .role{font-size:clamp(18px,2.4vw,24px);font-weight:600;letter-spacing:-0.02em;margin:0;color:var(--text)}
+  .tagline{margin:16px 0 0;max-width:720px;color:var(--muted);font-size:17px;line-height:1.7}
+  .tagline strong{color:var(--text);font-weight:600}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;background:var(--chip);border:1px solid var(--line);border-radius:999px;font-size:13px;font-weight:600}
+  .chip b{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--surface);border:1px solid var(--line);padding:2px 6px;border-radius:999px}
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:12px;font-weight:600;font-size:15px;border:1px solid var(--line);background:var(--surface);cursor:pointer;transition:all .18s ease}
+  .btn-primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+  .btn-primary:hover{background:var(--accent);border-color:var(--accent);color:#fff;transform:translateY(-1px)}
+  .btn-secondary:hover{border-color:var(--text);transform:translateY(-1px)}
+  .hero-grid{display:grid;grid-template-columns:1.25fr 0.75fr;gap:36px;align-items:start}
+  .hero-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+  .hero-card h3{margin:0 0 14px;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .fact{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+  .fact:first-of-type{border-top:0;padding-top:2px}
+  .fact span{color:var(--muted);font-size:13px}
+  .fact strong{font-size:14px;text-align:right}
+  .mini-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .mini-tags span{font-family:"JetBrains Mono",monospace;font-size:11px;padding:5px 7px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line)}
+  /* Sections */
+  section{padding:64px 0}
+  .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:26px}
+  .section-head h2{font-family:Sora,sans-serif;font-size:30px;letter-spacing:-0.03em;line-height:1;margin:0}
+  .section-head p{margin:0;color:var(--muted);max-width:520px;font-size:15px}
+  .rule{height:1px;background:var(--line);margin:0 0 28px}
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .card h3{margin:0 0 10px;font-size:16px;letter-spacing:-0.01em}
+  .card p{margin:0;color:var(--muted);font-size:15px;line-height:1.75}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+  .stat{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .stat strong{display:block;font-family:Sora,sans-serif;font-size:22px;letter-spacing:-0.03em}
+  .stat span{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+  /* Stack */
+  .stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .stack-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}
+  .stack-card h3{margin:0 0 12px;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .stack-card h3 i{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block}
+  .pills{display:flex;flex-wrap:wrap;gap:6px}
+  .pill{font-size:12.5px;font-weight:500;padding:6px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--line);line-height:1}
+  .pill.hot{background:var(--accent-bg);border-color:color-mix(in srgb, var(--accent) 28%, var(--line));color:var(--text);font-weight:600}
+  /* Experience */
+  .exp-list{display:flex;flex-direction:column;gap:16px}
+  .exp{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 1px 0 rgba(0,0,0,0.02)}
+  .exp-top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:start}
+  .exp h3{margin:0;font-size:18px;letter-spacing:-0.02em;line-height:1.2}
+  .exp h3 span{color:var(--accent)}
+  .exp .company{font-weight:600}
+  .date{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:600;padding:6px 9px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);white-space:nowrap}
+  .exp .loc{color:var(--muted);font-size:13px;margin-top:4px}
+  .exp ul{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px;line-height:1.7}
+  .exp li{margin:6px 0}
+  .exp li::marker{color:var(--accent)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:11px;padding:5px 7px;border-radius:999px;border:1px solid var(--line);background:var(--bg-2)}
+  /* Projects */
+  .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .project{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column}
+  .project-num{font-family:Sora,sans-serif;font-size:42px;line-height:1;letter-spacing:-0.04em;color:var(--line);font-weight:800}
+  @media (prefers-color-scheme: dark){ .project-num{color:#23314a} }
+  .project h3{margin:12px 0 8px;font-size:18px;letter-spacing:-0.02em;line-height:1.25}
+  .project p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.7;flex:1}
+  .project ul{margin:12px 0 0;padding-left:16px;color:var(--muted);font-size:13.5px;line-height:1.65}
+  .project .tags{margin-top:16px}
+  /* Edu */
+  .edu-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:16px}
+  .edu-item{display:flex;gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+  .edu-item:first-child{border-top:0;padding-top:4px}
+  .edu-icon{width:44px;height:44px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;font-size:20px;flex-shrink:0}
+  .edu-item strong{display:block;font-size:15px}
+  .edu-item span{color:var(--muted);font-size:13.5px}
+  .cert-list{display:flex;flex-direction:column;gap:10px}
+  .cert{display:flex;gap:12px;align-items:start;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
+  .cert-badge{width:36px;height:36px;border-radius:9px;background:var(--text);color:var(--bg);display:grid;place-items:center;font-size:16px;flex-shrink:0}
+  .cert strong{font-size:14px;line-height:1.3;display:block}
+  .cert span{font-size:12.5px;color:var(--muted)}
+  /* Contact */
+  .contact-wrap{background:var(--text);color:var(--bg);border-radius:22px;padding:32px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;overflow:hidden;position:relative}
+  .contact-wrap h2{font-family:Sora,sans-serif;font-size:32px;letter-spacing:-0.03em;line-height:1.05;margin:0 0 10px;color:var(--bg)}
+  .contact-wrap p{color:color-mix(in srgb, var(--bg) 72%, transparent);margin:0;max-width:520px;line-height:1.7}
+  .contact-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .contact-actions .btn{background:var(--bg);color:var(--text);border-color:transparent}
+  .contact-actions .btn-outline{background:transparent;color:var(--bg);border-color:color-mix(in srgb, var(--bg) 28%, transparent)}
+  .contact-list{display:flex;flex-direction:column;gap:10px}
+  .contact-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 14px;border:1px solid color-mix(in srgb, var(--bg) 16%, transparent);border-radius:12px;background:color-mix(in srgb, var(--bg) 6%, transparent)}
+  .contact-row small{display:block;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.65;font-weight:700}
+  .contact-row strong{font-size:14px;word-break:break-all}
+  .copy-btn{border:1px solid color-mix(in srgb, var(--bg) 22%, transparent);background:transparent;color:var(--bg);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+  .copy-btn:hover{background:var(--bg);color:var(--text)}
+  footer{padding:28px 0 40px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line)}
+  .reveal{opacity:1;transform:none}
+  @media (max-width: 960px){
+    .hero-grid,.about-grid,.edu-grid,.contact-wrap{grid-template-columns:1fr}
+    .stack-grid{grid-template-columns:repeat(2,1fr)}
+    .projects{grid-template-columns:1fr}
+    .links{display:none;position:absolute;top:64px;left:16px;right:16px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px;flex-direction:column;align-items:stretch;box-shadow:var(--shadow)}
+    .links.open{display:flex}
+    .links a{padding:12px}
+    .menu-btn{display:inline-flex}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 16px}
+    .hero{padding:48px 0 36px}
+    section{padding:44px 0}
+    .stack-grid{grid-template-columns:1fr 1fr;gap:10px}
+    .stats{grid-template-columns:1fr 1fr 1fr;gap:8px}
+    .stat strong{font-size:18px}
+    .exp{padding:18px}
+    .contact-wrap{padding:22px}
+  }
+  @media print{
+    .nav,.menu-btn,.actions,.contact-actions{display:none!important}
+    body{background:white;color:black}
+    .card,.exp,.project,.stack-card,.hero-card{box-shadow:none;border-color:#ddd}
+    section{padding:24px 0}
+  }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Harikiran Reddy Angala home">
+      <span class="brand-mark">HA</span>
+      <span>Harikiran Reddy Angala<small>Senior Java Full Stack Engineer</small></span>
+    </a>
+    <nav class="links" id="navLinks" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact" class="cta">Get in Touch</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="availability"><span class="dot"></span> Open to new opportunities • Jersey City, NJ</div>
+        <h1>Harikiran<br>Reddy <span>Angala</span></h1>
+        <p class="role">Senior Java Full Stack Engineer — Generative AI &amp; Enterprise Platforms</p>
+        <p class="tagline">I build <strong>enterprise Java applications</strong> that scale — Spring Boot microservices, event-driven systems with Kafka, and modern Angular front ends — now extended with <strong>Generative AI</strong>: Spring AI, RAG, LLM integration, and semantic search inside secured enterprise workflows.</p>
+        <div class="meta-row">
+          <span class="chip"><b>10+</b> Years Experience</span>
+          <span class="chip">Banking • Healthcare • Insurance</span>
+          <span class="chip">Java 17 • Spring Boot • Spring AI</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="#experience">View Experience ↓</a>
+          <a class="btn btn-secondary" href="#contact">Get in Touch →</a>
+          <a class="btn btn-secondary" href="https://www.linkedin.com/in/harikiran-reddy-angala/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Profile snapshot">
+        <h3>At a glance</h3>
+        <div class="fact"><span>Current focus</span><strong>Java + Generative AI</strong></div>
+        <div class="fact"><span>Backend</span><strong>Spring Boot • Microservices</strong></div>
+        <div class="fact"><span>AI</span><strong>Spring AI • RAG • LLMs</strong></div>
+        <div class="fact"><span>Frontend</span><strong>Angular • TypeScript • NgRx</strong></div>
+        <div class="fact"><span>Cloud</span><strong>AWS • Kubernetes • Docker</strong></div>
+        <div class="mini-tags">
+          <span>Spring AI ChatClient</span><span>RAG</span><span>Kafka</span><span>OAuth2 / JWT</span><span>AWS EKS</span>
+        </div>
+        <p style="margin:16px 0 0;color:var(--muted);font-size:13.5px;line-height:1.6">Enterprise delivery across banking, healthcare, insurance, supply chain, and enterprise software — from legacy J2EE to cloud-native AI-enabled services.</p>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>About Me</h2>
+        <p>Full-stack engineer who owns the whole slice — API design, data, events, UI, security, and production.</p>
+      </div>
+      <div class="rule"></div>
+      <div class="about-grid">
+        <article class="card reveal">
+          <h3>Enterprise Java, end to end</h3>
+          <p>Senior Java Full Stack Developer with 10+ years developing, enhancing, and supporting enterprise applications across banking, healthcare, insurance, supply chain, and enterprise software. Deep hands-on work with Java 8/11/17, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, and microservices for transaction, policy, order, inventory, and customer-facing systems.</p>
+          <div class="stats">
+            <div class="stat"><strong>10+</strong><span>Years</span></div>
+            <div class="stat"><strong>5</strong><span>Employers</span></div>
+            <div class="stat"><strong>3</strong><span>Certifications</span></div>
+          </div>
+        </article>
+        <article class="card reveal">
+          <h3>Now: Java + Generative AI</h3>
+          <p>Recent focus is bringing GenAI into existing Java estates the right way — Spring AI ChatClient, RAG document ingestion and chunking, vector embeddings and semantic search, prompt templates, AI response validation and grounding — all exposed through secured REST APIs with OAuth 2.0, OIDC, JWT, and RBAC, and observed with CloudWatch, ELK, and structured logging.</p>
+          <p style="margin-top:12px">Equally at home on the front end (Angular, TypeScript, RxJS, NgRx) and in event-driven back ends with Apache Kafka, WebSockets, and asynchronous processing.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section id="stack" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Tech Stack</h2>
+        <p>Grouped the way I actually work — language to cloud, with GenAI as a first-class layer.</p>
+      </div>
+      <div class="rule"></div>
+      <div class="stack-grid">
+        <div class="stack-card reveal">
+          <h3><i></i>Languages</h3>
+          <div class="pills">
+            <span class="pill hot">Java 8 / 11 / 17 / 21</span><span class="pill">TypeScript</span><span class="pill">JavaScript ES6+</span><span class="pill">Python</span><span class="pill">SQL</span><span class="pill">PL/SQL</span>
+          </div>
+        </div>
+        <div class="stack-card reveal">
+          <h3><i></i>Java / Backend</h3>
+          <div class="pills">
+            <span class="pill hot">Spring Boot</span><span class="pill hot">Microservices</span><span class="pill">Spring MVC</span><span class="pill">Spring Data JPA</span><span class="pill">Hibernate</span><span class="pill">Spring Cloud</span><span class="pill">REST APIs</span><span class="pill">GraphQL</span>
+          </div>
+        </div>
+        <div class="stack-card reveal">
+          <h3><i></i>Generative AI</h3>
+          <div class="pills">
+            <span class="pill hot">Spring AI</span><span class="pill hot">RAG</span><span class="pill hot">LLMs</span><span class="pill">Spring AI ChatClient</span><span class="pill">Prompt Engineering</span><span class="pill">Vector Embeddings</span><span class="pill">Semantic Search</span><span class="pill">NLP</span><span class="pill">AI Agents</span><span class="pill">AI Response Validation</span>
+          </div>
+        </div>
+        <div class="stack-card reveal">
+          <h3><i></i>Frontend</h3>
+          <div class="pills">
+            <span class="pill hot">Angular 12+</span><span class="pill">TypeScript</span><span class="pill">RxJS</span><span class="pill">NgRx</span><span class="pill">React</span><span class="pill">Redux Toolkit</span><span class="pill">Angular Material</span><span class="pill">HTML5 / CSS3</span>
+          </div>
+        </div>
+        <div class="stack-card reveal">
+          <h3><i></i>Messaging / Streaming</h3>
+          <div class="pills">
+            <span class="pill hot">Apache Kafka</span><span class="pill">Event-Driven Architecture</span><span class="pill">Producers / Consumers</span><span class="pill">WebSockets</span><span class="pill">Async Processing</span>
+          </div>
+        </div>
+        <div class="stack-card reveal">
+          <h3><i></i>Databases</h3>
+          <div class="pills">
+            <span class="pill">Oracle</span><span class="pill">PostgreSQL</span><span class="pill">MySQL</span><span class="pill">MongoDB</span><span class="pill">Redis</span><span class="pill">IBM DB2</span><span class="pill">Cassandra</span><span class="pill">Elasticsearch</span>
+          </div>
+        </div>
+        <div class="stack-card reveal">
+          <h3><i></i>Cloud / DevOps</h3>
+          <div class="pills">
+            <span class="pill hot">AWS</span><span class="pill">EKS / EC2 / S3 / RDS</span><span class="pill">Docker</span><span class="pill">Kubernetes</span><span class="pill">Jenkins</span><span class="pill">GitLab CI/CD</span><span class="pill">Terraform</span><span class="pill">Maven</span>
+          </div>
+        </div>
+        <div class="stack-card reveal">
+          <h3><i></i>Security</h3>
+          <div class="pills">
+            <span class="pill hot">Spring Security</span><span class="pill">OAuth 2.0</span><span class="pill">OIDC / SSO</span><span class="pill">JWT</span><span class="pill">RBAC</span><span class="pill">Okta</span><span class="pill">AWS IAM</span><span class="pill">API Security</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Work Experience</h2>
+        <p>Five roles, one thread — building reliable enterprise systems and evolving them toward cloud and AI.</p>
+      </div>
+      <div class="rule"></div>
+      <div class="exp-list">
+
+        <article class="exp reveal">
+          <div class="exp-top">
+            <div>
+              <h3><span class="company">Bank of America</span> — Sr. Java Full Stack with AI</h3>
+              <div class="loc">Charlotte, NC • Banking • Account servicing, transactions &amp; portfolio</div>
+            </div>
+            <span class="date">Jan 2026 — Present</span>
+          </div>
+          <ul>
+            <li>Integrated <strong>Spring AI</strong> with Spring Boot microservices to deliver Generative AI for enterprise knowledge retrieval, document analysis, contextual search, and natural-language interactions.</li>
+            <li>Built <strong>Spring AI ChatClient</strong> services handling prompts, conversation context, response parsing, and application-level validation for controlled LLM access.</li>
+            <li>Implemented end-to-end <strong>RAG workflows</strong> — document ingestion, chunking, metadata, embeddings, semantic search, and vector retrieval — with AI response validation and grounding before results reach REST APIs.</li>
+            <li>Secured AI-enabled services with Spring Security, OAuth 2.0, OIDC, SSO, JWT, and AWS IAM; added Kafka producers/consumers and Redis caching for account and retrieval data.</li>
+            <li>Containerized services with Docker on AWS EKS/EC2, with JMeter/k6 performance testing, JProfiler analysis, and CloudWatch/ELK observability.</li>
+          </ul>
+          <div class="tags"><span class="tag">Java 17</span><span class="tag">Spring Boot</span><span class="tag">Spring AI</span><span class="tag">RAG</span><span class="tag">Kafka</span><span class="tag">AWS EKS</span><span class="tag">Oracle / PL/SQL</span><span class="tag">Redis</span></div>
+        </article>
+
+        <article class="exp reveal">
+          <div class="exp-top">
+            <div>
+              <h3><span class="company">McKesson</span> — Sr. Java Full Stack Developer</h3>
+              <div class="loc">Irving, TX • Healthcare / Supply Chain • Inventory, supplier &amp; order platforms</div>
+            </div>
+            <span class="date">Sep 2024 — Dec 2025</span>
+          </div>
+          <ul>
+            <li>Built Spring Boot microservices for inventory, supplier, order, and fulfillment — order lifecycle from creation and validation through shipment, delivery, and reconciliation.</li>
+            <li>Developed <strong>Apache Kafka</strong> producers/consumers for inventory updates and order events with validation, retries, and exception handling; added WebSockets for near real-time warehouse and shipment updates.</li>
+            <li>Modeled data across <strong>MongoDB</strong> (documents, indexes, aggregations) and <strong>Oracle PL/SQL</strong> for allocation, pricing, and supplier verification; integrated Elasticsearch for inventory/supplier search.</li>
+            <li>Maintained enterprise integrations via REST, SOAP, XML/WSDL, Apache Axis and JAX-RPC; secured APIs with Spring Security, OAuth 2.0, Okta, SSO, and RBAC.</li>
+          </ul>
+          <div class="tags"><span class="tag">Java 17</span><span class="tag">Spring Boot</span><span class="tag">Kafka</span><span class="tag">MongoDB</span><span class="tag">Oracle</span><span class="tag">Elasticsearch</span><span class="tag">Kubernetes</span><span class="tag">AWS S3</span></div>
+        </article>
+
+        <article class="exp reveal">
+          <div class="exp-top">
+            <div>
+              <h3><span class="company">State Farm</span> — Java Full Stack Developer</h3>
+              <div class="loc">Bloomington, IL • Insurance • Member portal for policy, billing &amp; claims</div>
+            </div>
+            <span class="date">Jul 2023 — Aug 2024</span>
+          </div>
+          <ul>
+            <li>Developed the <strong>Angular 12+</strong> member portal for policy servicing, coverage, endorsements, renewals, quotes, billing, and claims using TypeScript, RxJS, and Angular Material.</li>
+            <li>Implemented <strong>NgRx</strong> state management and complex Reactive Forms with custom validators and dynamic controls; integrated with Spring Boot REST APIs.</li>
+            <li>Built real-time claims status tracking with <strong>WebSockets + RxJS</strong> and Kafka-backed lifecycle events, so updates appear without page refresh.</li>
+            <li>Secured frontend-to-backend flows with OAuth 2.0 and JWT (route guards, HTTP interceptors) coordinated with Spring Security; documents via AWS S3, deploys via Docker and Jenkins.</li>
+          </ul>
+          <div class="tags"><span class="tag">Angular 12+</span><span class="tag">TypeScript</span><span class="tag">NgRx / RxJS</span><span class="tag">Spring Boot</span><span class="tag">Kafka</span><span class="tag">PostgreSQL</span><span class="tag">OAuth2 / JWT</span></div>
+        </article>
+
+        <article class="exp reveal">
+          <div class="exp-top">
+            <div>
+              <h3><span class="company">Sonata Software</span> — Java / J2EE Developer</h3>
+              <div class="loc">Bangalore, India • Enterprise Software</div>
+            </div>
+            <span class="date">Nov 2017 — Dec 2021</span>
+          </div>
+          <ul>
+            <li>Developed enterprise applications with Core Java, J2EE, Spring MVC/Core, Hibernate/JPA across presentation, business, and data-access layers.</li>
+            <li>Built and consumed REST and SOAP services; optimized HQL/JPQL/SQL and Oracle/MySQL objects (tables, indexes, views, stored procedures).</li>
+            <li>Delivered JSP/HTML/CSS/JavaScript/jQuery interfaces with validation and dynamic behavior; owned exception handling, logging, and JUnit coverage.</li>
+            <li>Built with Maven and deployed to Tomcat/WebLogic across DEV, QA, UAT, and Production in Agile/Scrum releases.</li>
+          </ul>
+          <div class="tags"><span class="tag">Java / J2EE</span><span class="tag">Spring MVC</span><span class="tag">Hibernate / JPA</span><span class="tag">Oracle / MySQL</span><span class="tag">REST / SOAP</span><span class="tag">Tomcat / WebLogic</span></div>
+        </article>
+
+        <article class="exp reveal">
+          <div class="exp-top">
+            <div>
+              <h3><span class="company">Zoho Corporation</span> — Java Developer</h3>
+              <div class="loc">Chennai, India • Enterprise Software Products</div>
+            </div>
+            <span class="date">Jul 2014 — Oct 2017</span>
+          </div>
+          <ul>
+            <li>Implemented business logic with Core Java and OOP — collections, exception handling, interfaces, inheritance — and reusable application components.</li>
+            <li>Developed Java/J2EE modules with JSP, Servlets, and Spring MVC; built RESTful services connecting frontend modules to backend services.</li>
+            <li>Implemented Hibernate/JPA persistence (entities, CRUD, relationships, transactions) and Oracle/MySQL schema, views, indexes, and stored procedures.</li>
+            <li>Shipped JSP/HTML/CSS/JavaScript/jQuery interfaces, JUnit tests, and Tomcat deployments in an Agile/Scrum team.</li>
+          </ul>
+          <div class="tags"><span class="tag">Core Java</span><span class="tag">Spring MVC</span><span class="tag">Hibernate / JPA</span><span class="tag">JSP / Servlets</span><span class="tag">Oracle / MySQL</span><span class="tag">JUnit</span></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Featured Projects</h2>
+        <p>Three representative builds — AI retrieval, event-driven commerce, and a member-facing portal.</p>
+      </div>
+      <div class="rule"></div>
+      <div class="projects">
+        <article class="project reveal">
+          <div class="project-num">01</div>
+          <h3>Enterprise RAG Knowledge Assistant</h3>
+          <p>GenAI knowledge layer inside secured banking services — employees ask natural-language questions and get grounded answers drawn from enterprise documents, not the open internet.</p>
+          <ul>
+            <li>Spring AI ChatClient for prompts, context, and response handling</li>
+            <li>RAG ingestion: extraction, chunking, metadata, embeddings, semantic search</li>
+            <li>AI response validation &amp; grounding before REST delivery</li>
+          </ul>
+          <div class="tags"><span class="tag">Spring AI</span><span class="tag">RAG</span><span class="tag">LLM</span><span class="tag">Vector Search</span><span class="tag">Spring Security</span></div>
+        </article>
+        <article class="project reveal">
+          <div class="project-num">02</div>
+          <h3>Event-Driven Order Fulfillment Platform</h3>
+          <p>Microservices platform for inventory, supplier, and order operations where every state change is an event — built for high-volume healthcare supply-chain workflows.</p>
+          <ul>
+            <li>Spring Boot microservices with clear service boundaries</li>
+            <li>Kafka producers/consumers for inventory &amp; order lifecycle events</li>
+            <li>WebSockets for real-time shipment and warehouse updates</li>
+          </ul>
+          <div class="tags"><span class="tag">Spring Boot</span><span class="tag">Kafka</span><span class="tag">MongoDB</span><span class="tag">WebSockets</span><span class="tag">Kubernetes</span></div>
+        </article>
+        <article class="project reveal">
+          <div class="project-num">03</div>
+          <h3>Insurance Member Portal</h3>
+          <p>Member-facing portal for policy servicing, billing, and claims — responsive Angular experience backed by Spring Boot services and event-driven claim updates.</p>
+          <ul>
+            <li>Angular 12+ with NgRx/RxJS and Reactive Forms</li>
+            <li>Policy, billing, claims, documents &amp; renewal workflows</li>
+            <li>OAuth 2.0 / JWT with route guards and interceptors</li>
+          </ul>
+          <div class="tags"><span class="tag">Angular</span><span class="tag">NgRx</span><span class="tag">TypeScript</span><span class="tag">Spring Boot</span><span class="tag">OAuth2</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Education &amp; Certifications</h2>
+        <p>Formal training in data science, plus cloud and Java credentials that map directly to the work.</p>
+      </div>
+      <div class="rule"></div>
+      <div class="edu-grid">
+        <article class="card reveal">
+          <h3 style="margin-bottom:6px">Education</h3>
+          <div class="edu-item">
+            <div class="edu-icon">🎓</div>
+            <div>
+              <strong>Master of Science in Data Science</strong>
+              <span>Saint Peter's University</span>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.65">Graduate training in data science underpinning recent work in NLP, embeddings, semantic search, and applied machine learning within enterprise Java systems.</p>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-icon">☕</div>
+            <div>
+              <strong>Java Foundation</strong>
+              <span>10+ years from Core Java &amp; J2EE to Java 17 microservices</span>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.65">Started at Zoho and Sonata on Core Java, Spring MVC, and Hibernate — now designing cloud-native, AI-enabled services on AWS.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card reveal">
+          <h3 style="margin-bottom:14px">Certifications</h3>
+          <div class="cert-list">
+            <div class="cert">
+              <div class="cert-badge">☕</div>
+              <div><strong>Oracle Certified Professional: Java SE 17 Developer</strong><span>Oracle • Java SE 17</span></div>
+            </div>
+            <div class="cert">
+              <div class="cert-badge">☁️</div>
+              <div><strong>AWS Certified Developer – Associate</strong><span>Amazon Web Services • Developer Associate</span></div>
+            </div>
+            <div class="cert">
+              <div class="cert-badge">🤖</div>
+              <div><strong>AWS Certified AI Practitioner</strong><span>Amazon Web Services • AI Practitioner</span></div>
+            </div>
+          </div>
+          <p style="margin:14px 0 0;color:var(--muted);font-size:13.5px">Also hands-on daily with GitHub Copilot, Claude, and ChatGPT for code analysis, refactoring, testing, and prompt development.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="padding-top:8px">
+    <div class="wrap">
+      <div class="contact-wrap reveal">
+        <div>
+          <h2>Let's build something<br>that ships.</h2>
+          <p>I'm open to Senior Java Full Stack and Java + GenAI roles — enterprise platforms, microservices, and AI-enabled products. Based in Jersey City, NJ and comfortable with hybrid/on-site collaboration.</p>
+          <div class="contact-actions">
+            <a class="btn" href="mailto:harikiranreddya49@gmail.com">✉️ Email Me</a>
+            <a class="btn btn-outline" href="https://www.linkedin.com/in/harikiran-reddy-angala/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="btn btn-outline" href="https://github.com/hari131415" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+          <p style="margin-top:16px;font-size:13px;opacity:0.75">Prefer a call? <a href="tel:+15513080793" style="text-decoration:underline;text-underline-offset:3px">+1 551-308-0793</a></p>
+        </div>
+        <div class="contact-list">
+          <div class="contact-row">
+            <div><small>Email</small><strong>harikiranreddya49@gmail.com</strong></div>
+            <button class="copy-btn" data-copy="harikiranreddya49@gmail.com">Copy</button>
+          </div>
+          <div class="contact-row">
+            <div><small>Phone</small><strong>+1 551-308-0793</strong></div>
+            <button class="copy-btn" data-copy="+1 551-308-0793">Copy</button>
+          </div>
+          <div class="contact-row">
+            <div><small>LinkedIn</small><strong>linkedin.com/in/harikiran-reddy-angala</strong></div>
+            <a class="copy-btn" href="https://www.linkedin.com/in/harikiran-reddy-angala/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center">Open ↗</a>
+          </div>
+          <div class="contact-row">
+            <div><small>GitHub</small><strong>github.com/hari131415</strong></div>
+            <a class="copy-btn" href="https://github.com/hari131415" target="_blank" rel="noopener" style="display:inline-flex;align-items:center">Open ↗</a>
+          </div>
+          <div class="contact-row">
+            <div><small>Location</small><strong>Jersey City, New Jersey</strong></div>
+            <span style="font-size:12px;opacity:0.7">EST • Open to relocation</span>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <span>© 2026 Harikiran Reddy Angala — Senior Java Full Stack Engineer</span>
+        <span>Java • Spring Boot • Spring AI • Angular • Kafka • AWS</span>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.textContent = open ? '✕' : '☰';
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuBtn.textContent = '☰';
+    menuBtn.setAttribute('aria-expanded','false');
+  }));
+
+  // Copy buttons
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.getAttribute('data-copy');
+      const original = btn.textContent;
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+          document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); document.body.removeChild(ta);
+        }
+        btn.textContent = 'Copied ✓';
+      } catch(e){ btn.textContent = 'Copy failed'; }
+      setTimeout(()=> btn.textContent = original, 1600);
+    });
+  });
+
+  // Reveal on scroll (respect reduced motion)
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+    }, {threshold: 0.08});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el=> el.classList.add('visible'));
+  }
+
+  // Active nav
+  const sections = ['about','stack','experience','projects','education','contact'];
+  const linkMap = {};
+  navLinks.querySelectorAll('a').forEach(a=>{
+    const href = a.getAttribute('href');
+    if(href && href.startsWith('#')) linkMap[href.slice(1)] = a;
+  });
+  const onScroll = () => {
+    let current = 'about';
+    sections.forEach(id=>{
+      const el = document.getElementById(id);
+      if(el && el.getBoundingClientRect().top <= 120) current = id;
+    });
+    Object.values(linkMap).forEach(a=> a.classList.remove('active'));
+    if(linkMap[current]) linkMap[current].classList.add('active');
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+</script>
+</body>
+</html>
